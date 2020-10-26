@@ -12,13 +12,13 @@ section {
 }
 
 nav {
-    height: 150px;
-    line-height: 150px;
+    height: 100%;
+    line-height: 100%;
 }
 
 nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
-    height: 150px;
-    line-height: 150px;
+    height: 100%;
+    line-height: 100%;
 }
 
 nav .button-collapse i {
@@ -32,7 +32,7 @@ nav .brand-logo {
 
 @media only screen and (min-width: 601px){
     nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
-        height: 150px;
-        line-height: 150px;
+        height: 100%;
+        line-height: 100%;
     }
 }
