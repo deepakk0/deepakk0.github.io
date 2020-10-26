@@ -5,14 +5,15 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Personal website">
+  <meta name="author" content="Deepak Krishnankutty">
 
   <title>Deepak Krishnankutty</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
   <!-- Custom styles for this template -->
   <link href="css/scrolling-nav.css" rel="stylesheet">
 
@@ -21,25 +22,14 @@
 <body id="page-top">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-center py-lg-5" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger py-lg-5" href="#page-top"><img src="./me.jpg" height="150" alt="Home"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About Me</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#services">Research</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Teaching</a>
-          </li>
-        </ul>
-      </div>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo center"><img src="./me.jpg" height="150" alt="Home"></a>
+      <ul class="left hide-on-med-and-down">
+        <li><a class="waves-effect waves-light btn" href="#About">About Me <i class="material-icons left">person</i></a></li>
+        <li><a class="waves-effect waves-light btn" href="#Research">Research <i class="material-icons left">analytics</i></a></li>
+        <li><a class="waves-effect waves-light btn" href="#Teaching">Teaching <i class="material-icons left">school</i></a></li>
+      </ul>
     </div>
   </nav>
 
@@ -50,7 +40,7 @@
     </div>
   </header>
 
-  <section id="about">
+  <section id="About">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -61,7 +51,7 @@
     </div>
   </section>
 
-  <section id="services" class="bg-light">
+  <section id="Research" class="bg-light">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -72,7 +62,7 @@
     </div>
   </section>
 
-  <section id="contact">
+  <section id="Teaching">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
@@ -95,12 +85,9 @@
     <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="js/materialize.min.js"></script>
 
   <!-- Custom JavaScript for this theme -->
   <script src="js/scrolling-nav.js"></script>
