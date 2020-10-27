@@ -1,9 +1,16 @@
 /*Bootstrap 4 breakpoints
 */
+/* Smallest devices (portrait phones, 320px and up) */
+@media (min-width: 320px) {
+  h4 {
+    font-size: 1rem;
+  } /*1rem = 16px*/
+}
+
 /* Small devices (landscape phones, 544px and up) */
 @media (min-width: 544px) {
   h4 {
-    font-size: 1rem;
+    font-size: 1.2rem;
   } /*1rem = 16px*/
 }
 
