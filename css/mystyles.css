@@ -1,10 +1,22 @@
 /*Bootstrap 4 breakpoints
 */
+@media only screen and (min-width: 0) {
+  html {
+    font-size: 8px;
+  }
+}
+
+
 /* Smallest devices (portrait phones, 320px and up) */
 @media (min-width: 320px) {
   h4 {
     font-size: 1.4rem;
   } /*1rem = 16px*/
+}
+@media only screen and (min-width: 320px) {
+  html {
+    font-size: 10px;
+  }
 }
 
 /* Small devices (landscape phones, 544px and up) */
@@ -14,11 +26,24 @@
   } /*1rem = 16px*/
 }
 
+@media only screen and (min-width: 544px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {
   h4 {
     font-size: 1.8rem;
   } /*1rem = 16px*/
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
