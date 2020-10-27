@@ -1,5 +1,9 @@
 /*Bootstrap 4 breakpoints
 */
+html {
+  scroll-behavior: smooth;
+}
+
 @media only screen and (min-width: 0) {
   html {
     font-size: 8px;
