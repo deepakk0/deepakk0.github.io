@@ -22,7 +22,7 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   cursor: hand;
   border-radius: 50%;
-  background: #26a69a;
+  background: #00838f;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-transition: all 0.3s cubic-bezier(0.25, 0.25, 0, 1);
   -ms-transition: all 0.3s cubic-bezier(0.25, 0.25, 0, 1);
@@ -30,7 +30,7 @@
   -o-transition: all 0.3s cubic-bezier(0.25, 0.25, 0, 1);
   transition: all 0.3s cubic-bezier(0.25, 0.25, 0, 1); }
   .material-scrolltop:hover {
-    background-color: #26a69a;
+    background-color: #00838f;
     text-decoration: none;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5), 0 3px 15px rgba(0, 0, 0, 0.5); }
   .material-scrolltop::before {
@@ -45,7 +45,7 @@
     content: '';
     width: 0;
     border-radius: 100%;
-    background: #00bfa5; }
+    background: #607d8b; }
   .material-scrolltop:active::before {
     width: 120%;
     padding-top: 120%;
