@@ -28,7 +28,7 @@
 
 @media only screen and (min-width: 544px) {
   html {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -42,7 +42,7 @@
 
 @media only screen and (min-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -50,8 +50,6 @@
 @media (min-width: 992px) {
   h4 {
     font-size: 1.8rem;
-  }
-  }
   } /*1rem = 16px*/
 }
 
