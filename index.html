@@ -17,6 +17,9 @@
   <!-- Custom styles for this template -->
   <link href="css/mystyles.css" rel="stylesheet">
 
+  <!-- Material ScrollTop stylesheet -->
+  <link rel="stylesheet" href="dist/material-scrolltop.css" />
+
 </head>
 
 <body id="page-top">
@@ -119,9 +122,19 @@
     <!-- /.container -->
   </footer>
 
+  <!-- material-scrolltop plugin -->
+  <script src="dist/material-scrolltop.js"></script>
   
   <!--JavaScript at end of body for optimized loading-->
   <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <!-- material-scrolltop button -->
+  <button class="material-scrolltop" type="button"></button>
+
+  <!-- Initialize material-scrolltop (minimal) -->
+  <script>
+    $('body').materialScrollTop();
+  </script>
 
 </body>
 
