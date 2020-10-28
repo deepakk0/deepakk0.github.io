@@ -23,10 +23,11 @@ html {
   div.imgMe{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-style: none;
-    padding-top: 20px; 
-    padding-bottom: 0px;
-    height: 220px;
-    margin-left: 2%;
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 212px;
+    margin-top: 0px;
+    margin-left: 5px;
   }
   h4 {
     font-size: 1.5rem;
@@ -54,18 +55,19 @@ html {
     line-height:0;
     font-size: 1.7rem;
     margin: 1.52rem 0 0.3rem 0.5rem;
-    margin-left:20%;
+    margin-left:25%;
   } /*1rem = 16px*/
   div.imgMe{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-style: none;
-    padding-top: 20px; 
-    padding-bottom: 0px;
-    height: 220px;
-    margin-left: 60%;
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 212px;
+    margin-top: 0px;
+    margin-left: 125px;
   }
   h4 {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   } /*1rem = 16px*/
   h5 {
     font-size: 1.3rem;
@@ -98,10 +100,11 @@ html {
   div.imgMe{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-style: none;
-    padding-top: 20px; 
-    padding-bottom: 0px;
-    height: 220px;
-    margin-left: 60%;
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 212px;
+    margin-top: 0px;
+    margin-left: 125px;
   }
   h4 {
     font-size: 1.8rem;
@@ -136,9 +139,10 @@ html {
   div.imgMe{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-style: none;
-    padding-top: 10px; 
-    padding-bottom: 0px;
-    height: 198px;
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 212px;
+    margin-top: 25px;
     margin-left: 0%;
   }
   h4 {
@@ -168,9 +172,10 @@ html {
   div.imgMe{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-style: none;
-    padding-top: 10px; 
-    padding-bottom: 0px;
-    height: 198px;
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 212px;
+    margin-top: 25px;
     margin-left: 0%;
   }
   h4 {
@@ -202,9 +207,10 @@ Custom media queries
   div.imgMe{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-style: none;
-    padding-top: 10px; 
-    padding-bottom: 0px;
-    height: 198px;
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 212px;
+    margin-top: 25px;
     margin-left: 0%;
   }
   h4 {
