@@ -194,3 +194,35 @@ html {
       margin-left: auto; 
   } 
 }
+
+/*
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+Custom media queries
+*/
+
+/* Portrait mode on most devices */
+@media (min-width: 768px) and (max-height: 1536px) and (orientation: portrait){
+  div.h4me {
+    font-weight: 400;
+    line-height:0;
+    font-size: 1.8rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:15%;
+  } /*1rem = 16px*/
+  div.imgMe{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-style: none;
+    padding-top: 0; 
+    padding-bottom: 0;
+    width: 208px;
+    height: 208px;
+    margin-top: 0px;
+    margin-left: 120px;
+  }
+  h4 {
+    font-size: 1.8rem;
+  } /*1rem = 16px*/
+  h5 {
+    font-size: 1.5rem;
+  }
+}
