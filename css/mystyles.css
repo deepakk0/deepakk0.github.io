@@ -25,9 +25,10 @@ html {
     border-style: none;
     padding-top: 0; 
     padding-bottom: 0;
+    width: 212px;
     height: 212px;
     margin-top: 0px;
-    margin-left: 5px;
+    margin-left: 0px;
   }
   h4 {
     font-size: 1.5rem;
@@ -62,9 +63,10 @@ html {
     border-style: none;
     padding-top: 0; 
     padding-bottom: 0;
+    width: 212px;
     height: 212px;
     margin-top: 0px;
-    margin-left: 125px;
+    margin-left: 120px;
   }
   h4 {
     font-size: 1.7rem;
@@ -102,9 +104,10 @@ html {
     border-style: none;
     padding-top: 0; 
     padding-bottom: 0;
+    width: 212px;
     height: 212px;
     margin-top: 0px;
-    margin-left: 125px;
+    margin-left: 120px;
   }
   h4 {
     font-size: 1.8rem;
@@ -141,6 +144,7 @@ html {
     border-style: none;
     padding-top: 0; 
     padding-bottom: 0;
+    width: 212px;
     height: 212px;
     margin-top: 25px;
     margin-left: 0%;
@@ -174,6 +178,7 @@ html {
     border-style: none;
     padding-top: 0; 
     padding-bottom: 0;
+    width: 212px;
     height: 212px;
     margin-top: 25px;
     margin-left: 0%;
@@ -209,6 +214,7 @@ Custom media queries
     border-style: none;
     padding-top: 0; 
     padding-bottom: 0;
+    width: 212px;
     height: 212px;
     margin-top: 25px;
     margin-left: 0%;
