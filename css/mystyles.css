@@ -13,6 +13,20 @@ html {
 
 /* Smallest devices (portrait phones, 320px and up) */
 @media (min-width: 320px) {
+  h4me {
+    font-weight: 200;
+    line-height:0;
+    font-size: 1.5rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:10%;
+  } /*1rem = 16px*/
+  imgMe{
+    border-style: none;
+    padding-top: 20px; 
+    padding-bottom: 0px;
+    height: 220px;
+    margin-left: 2%;
+  }
   h4 {
     font-size: 1.5rem;
   } /*1rem = 16px*/
@@ -34,6 +48,20 @@ html {
 
 /* Small devices (landscape phones, 544px and up) */
 @media (min-width: 544px) {
+  h4me {
+    font-weight: 300;
+    line-height:0;
+    font-size: 1.7rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:20%;
+  } /*1rem = 16px*/
+  imgMe{
+    border-style: none;
+    padding-top: 20px; 
+    padding-bottom: 0px;
+    height: 220px;
+    margin-left: 60%;
+  }
   h4 {
     font-size: 1.6rem;
   } /*1rem = 16px*/
@@ -58,6 +86,20 @@ html {
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {
+  h4me {
+    font-weight: 400;
+    line-height:0;
+    font-size: 1.8rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:15%;
+  } /*1rem = 16px*/
+  imgMe{
+    border-style: none;
+    padding-top: 20px; 
+    padding-bottom: 0px;
+    height: 220px;
+    margin-left: 60%;
+  }
   h4 {
     font-size: 1.8rem;
   } /*1rem = 16px*/
@@ -81,6 +123,20 @@ html {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  h4me {
+    font-weight: 400;
+    line-height:0;
+    font-size: 1.8rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:15%;
+  } /*1rem = 16px*/
+  imgMe{
+    border-style: none;
+    padding-top: 10px; 
+    padding-bottom: 0px;
+    height: 198px;
+    margin-left: 0%;
+  }
   h4 {
     font-size: 1.8rem;
   } /*1rem = 16px*/
@@ -98,6 +154,20 @@ html {
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+  h4me {
+    font-weight: 400;
+    line-height:0;
+    font-size: 1.8rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:15%;
+  } /*1rem = 16px*/
+  imgMe{
+    border-style: none;
+    padding-top: 10px; 
+    padding-bottom: 0px;
+    height: 198px;
+    margin-left: 0%;
+  }
   h4 {
     font-size: 1.8rem;
   } /*1rem = 16px*/
@@ -117,6 +187,20 @@ Custom media queries
 
 /* Set width to make card deck cards 100% width */
 @media (min-width: 950px) and (max-width: 1100px) {
+  h4me {
+    font-weight: 400;
+    line-height:0;
+    font-size: 1.8rem;
+    margin: 1.52rem 0 0.3rem 0.5rem;
+    margin-left:15%;
+  } /*1rem = 16px*/
+  imgMe{
+    border-style: none;
+    padding-top: 10px; 
+    padding-bottom: 0px;
+    height: 198px;
+    margin-left: 0%;
+  }
   h4 {
     font-size: 1.8rem;
   }
