@@ -22,6 +22,4 @@ $(document).ready(function(){
       });
     } // End if
   });
-
-  $('#div-spacer').css("height",$('.card-transaction:last').css("height"));
 });
