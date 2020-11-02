@@ -42,6 +42,7 @@ html {
     font-size: 10px;
   }
   body { 
+      padding-bottom: 120px;
       width: 100%; 
       max-width: 320px; /* or whatever width you want */ 
       margin-right: auto; 
@@ -82,6 +83,7 @@ html {
   }
 
   body { 
+      padding-bottom: 120px;
       width: 100%; 
       max-width: 544px; /* or whatever width you want */ 
       margin-right: auto; 
@@ -122,7 +124,8 @@ html {
     font-size: 16px;
   }
 
-  body { 
+  body {  
+      padding-bottom: 120px;
       width: 100%; 
       max-width: 768px; /* or whatever width you want */ 
       margin-right: auto; 
@@ -157,6 +160,7 @@ html {
   }
 
   body { 
+      padding-bottom: 120px;
       width: 100%; 
       max-width: 992px; /* or whatever width you want */ 
       margin-right: auto; 
@@ -188,6 +192,7 @@ html {
   } /*1rem = 16px*/
 
   body { 
+      padding-bottom: 120px;
       width: 100%; 
       max-width: 1200px; /* or whatever width you want */ 
       margin-right: auto; 
