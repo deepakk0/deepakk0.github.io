@@ -1,0 +1,28 @@
+; Add.asm
+
+main:
+	push eax ; a
+	push ebx ; b
+	call add
+	add esp, 8
+
+add:	; add a and b
+; input parameters were pushed to the stack
+push eax
+push ebx
+push ecx ; not technically needed bcs we don't use ecx
+push edx ; not technically needed bcs we don't use edx
+push ebp
+mov ebp, esp
+
+mov ebx, [esp + 24]	; this holds b
+mov eax, [esp + 28] ; this holds a
+
+add eax, ebx
+
+pop ebp
+pop edx ; wouldn't be used if we didn't push edx
+pop ecx ; wouldn't be used if we didn't push ecx
+pop ebx
+; eax holds sum
+ret

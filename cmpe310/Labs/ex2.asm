@@ -1,0 +1,24 @@
+; File: ex2.asm
+;
+; This program demonstrates the use of a loop sequence
+;
+; Assemble using NASM:  nasm -g -f elf -F dwarf ex2.asm
+; Compile using gcc:    gcc -m32 ex2.o -o ex2
+; Debug using gdb:      gdb -tui ex2
+;
+
+        SECTION .text                                   ; Code section.
+        global main
+
+main:   
+        mov     ecx,234                                 ; move data into ecx
+        mov     eax,20                                  ; move data into eax
+l0:     inc     ecx                                     ; increment the value in ecx
+        inc     eax                                     ; increment the value in eax
+        cmp     eax,37                                  ; compare eax with decimal 37
+        jnz     l0                                      ; jump to label l0 if zero flag was not set
+
+                                                        ; final exit
+        mov     eax,1                                   ; system call number (sys_exit)
+        xor     ebx,ebx                                 ; sys_exit return status
+        int     0x80                                    ; call kernel

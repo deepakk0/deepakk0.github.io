@@ -1,0 +1,492 @@
+; Final Project
+; CMPE 310 Patel
+; Christopher Pagan
+; Elise Donkor
+; Emmett Cummings
+
+; Force 16-bit code and 8086 instruction set
+; ------------------------------------------
+
+;;; DON'T CHANGE
+	
+BITS 16
+CPU 8086
+
+; Keyboard Display Controller Port Addresses
+; ------------------------------------------	
+;;; EXAMPLE
+
+%define	KBD_CMD 0xFFF2		;keyboard command register
+%define KBD_DAT 0xFFF0		;keyboard data register
+	
+; Interrupt Controller Port addresses
+; -----------------------------------
+;;; EXAMPLE
+	
+%define INT_A0  0xFFF4 		;8259 A0=0 Data
+%define INT_A1  0XFFF6		;8259 A0=1 Command
+
+%define TIME_CMD 0xFFDE 		;8254 cmd
+%define TIME_C0  0xFFD8			;8254 counter 0
+
+%define LED8     0xFFCC			;LED
+
+			
+; --------------------------------------------------------------------------------------------------------------------------
+; 															      			
+; ROM code section, align at 16 byte boundry, 16-bit code 								      	
+; Code segment: PROGRAM, relocate using loc86 AD option to 0xF0000 size is variable, burn at location 0x18000 in the Flash    
+; Use loc86 BS option to put a jump from 0xFFFF0 (reset location) to the code segment, burn at location 0x1FFF8 in the Flash  
+; 															      
+; --------------------------------------------------------------------------------------------------------------------------
+;;THIS IS YOUR CODE SEGMENT, don't change anything till the cli instruction
+
+section PROGRAM USE16 ALIGN=16 CLASS=CODE
+	
+..start
+	cli				; Turn off interrupts
+	
+	;Initial Screen display
+	mov ax, 0 ; second row
+   mov bx, welcomemsg
+   mov cx, 80
+   mov dx, 0
+   mov si, ds
+   int 10H
+	
+	; Setup the Timer cmd
+	mov dx, TIME_CMD ;timer adress
+	mov al, 00110100b
+	out dx, al
+	
+	; send least seg byte to counter 0
+	mov dx, TIME_C0 ;timer adress 1
+	mov al, 00100100b
+	out dx, al	
+	
+	; send most seg byte to counter 0
+	mov dx, TIME_C0 ;timer adress 2
+	mov al, 11110100b
+	; mov al, 00010000b	;TEST
+	out dx, al	
+   
+   
+	;set the clock
+	;001 says clock
+	; 11001 is 25 because .5 MHz /25 = 100 KHz and we want 100 kHz
+   mov dx, KBD_CMD
+   mov al, 00111001b
+   out dx, al
+   
+   ; Setup the keyboard
+   mov dx, KBD_CMD
+   mov al, 00000001b
+   out 	dx, al
+   
+   ;clear the FIFO
+   mov dx, KBD_CMD
+   mov al, 11000011b
+   out 	dx, al
+   
+   ; Send initialization control words (ICWs) to interrupt controller
+   mov dx, INT_A0 ; 8259 command
+   mov al, 00010011b ; ICW1
+   out dx, al
+   
+   mov dx, INT_A1
+   mov al,  00001000b; ICW2
+   out dx, al
+   
+   mov dx, INT_A1
+   mov al, 000000001b ; ICW4
+   out dx, al
+   
+   mov dx, INT_A1 ; OCW1
+   mov al, 11101101b
+   ; mov al, 11100000b
+   out dx, al
+   
+; Setup up interrupt vector table
+; -------------------------------
+	
+    mov bx, 8H * 4		;Interrupt vector table 0x08 base address
+	mov ax, 0
+	mov es, ax
+    mov cx, intr1 ;INTR1 service routine
+    mov [es:bx+4], cx		;offset to IR1
+    mov [es:bx+6], cs		;current code segment
+
+	mov cx, intr4		;INTR4 service routine for timer
+	mov [es:bx+16], cx		;offset to IR4
+	mov [es:bx+18], cs		;segment
+   
+	sti ; turn on interrupts
+
+	
+	;; When using interrupts use the following instruction (jmp $) to sit in a busy loop, turn on interrupts before that
+	jmp $
+
+	; Long jump
+	F4_jmp:
+	jmp F4
+; --------------------------------------------------------------------------------------------------------------------------
+  ; Interrupt service routine for keyboard
+  intr1:
+   read_FIFO:
+   
+   ;moved data from keyboard into al
+   mov dx, KBD_DAT
+   in ax, dx
+   ;clear the first two bits
+   ;first 2 bits are don't cares
+   and al, 00111111b ; 
+   mov cl, al ;;;;;;;;;;;
+   
+   ; Display key in LED
+    ; mov dx, LED8 
+	; out dx, al
+   
+   ; Compare to jump to each key's code
+   cmp cl, 00000000b ; and with the first bits zero to find the values of the last three bits (RETURN) 
+   jz Zero
+   cmp cl, 00000100b ; and with the first bits zero to find the values of the last three bits (RETURN) 
+   jz F1
+   cmp cl, 00001100b ; and with the first bits zero to find the values of the last three bits (RETURN) 
+   jz F2
+   cmp cl, 00010100b ; and with the first bits zero to find the values of the last three bits (RETURN) 
+   jz F3
+   cmp cl, 00011100b ; and with the first bits zero to find the values of the last three bits (RETURN) 
+   jz F4_jmp
+   
+   ;jump to end
+    jmp intr1_Done
+	
+	; Speed up or slow down the program
+	Zero:
+	mov byte al, [speed]
+	cmp al, 40	
+	je Zero_f
+	mov byte [speed], 40 ; slow down
+	jmp intr1_Done
+	Zero_f:
+	mov byte [speed], 1 ; Speed up
+	jmp intr1_Done
+
+	
+	; Start the watch
+   F1:
+   mov byte [start_stop], 1
+   jmp intr1_Done
+   
+   ; Stop the watch
+   F2:
+   ; mov byte [speed], 1
+   mov byte [start_stop], 0
+   jmp intr1_Done
+
+   ; Reset the watch
+   F3:
+   mov byte [seconds], 0 ; set numbers to zero
+   mov byte [minutes], 0
+   mov byte [hours], 0
+   
+   mov byte [seconds_L], 0 ; set _L numbers to zero
+   mov byte [minutes_L], 0
+   mov byte [hours_L], 0
+   
+   mov byte [key3], 48 ;set keys to zero
+   mov byte [key4], 48
+   mov byte [key5], 48
+   mov byte [key6], 48
+   
+   mov byte [key1_L], 48 ;set _ keys to zero
+   mov byte [key2_L], 48
+   mov byte [key3_L], 48 
+   mov byte [key4_L], 48
+   mov byte [key5_L], 48
+   mov byte [key6_L], 48
+   
+   ; display initial display
+	mov ax, 0 
+	mov bx, welcomemsg
+	mov cx, 80
+	mov dx, 0
+	mov si, ds
+	int 10H
+   
+   jmp intr1_Done
+   
+   F4:
+   
+   	; Display all Keys in Last
+   mov ax, 2 ; second row
+   mov bx, key6
+   mov cx, 8
+   mov dx, 11
+   mov si, ds
+   int 10H
+   
+   ; Display all _L Keys in Current
+   mov ax, 3 ; second row
+   mov bx, key6_L
+   mov cx, 8
+   mov dx, 11
+   mov si, ds
+   int 10H
+   
+
+   
+   
+   ; Lap Calculations
+   ; Sec Calc
+   mov ax, 0 ;clear ax
+   mov al, [seconds]
+   sub al, [seconds_L]
+   cmp al, 0 ; Check if negative/ carry needed
+   jge sec_Display 
+   
+   add al, 60
+   inc byte [minutes_L]
+   
+   sec_Display:
+   ; Display Lab sec
+   	; Divide seconds by 10
+	div byte [ten]
+	
+	; Convert seconds to ascii
+   	add ah, 48
+	mov [key1_L], ah
+	add al, 48
+	mov [key2_L], al
+	
+	
+	; Min Calc
+	mov ax, 0 ;clear ax
+   mov al, [minutes]
+   sub al, [minutes_L]
+   cmp al, 0 ; Check if negative/ carry needed
+   jge min_Display 
+   
+   add al, 60
+   inc byte [hours_L]
+   
+   min_Display:
+   ; Display Lab min
+   	; Divide seconds by 10
+	div byte [ten]
+	
+	; Convert min to ascii
+   	add ah, 48
+	mov [key3_L], ah
+	add al, 48
+	mov [key4_L], al
+   
+   ; Hour Calc
+   mov ax, 0 ;clear ax
+   mov al, [hours]
+   sub al, [hours_L]
+
+   ; Display Lab hours
+   	; Divide hours by 10
+	div byte [ten]
+	
+	; Convert min to ascii
+   	add ah, 48
+	mov [key5_L], ah
+	add al, 48
+	mov [key6_L], al
+   
+   ; Display all _L Keys in Current
+   mov ax, 4 ; second row
+   mov bx, key6_L
+   mov cx, 8
+   mov dx, 11
+   mov si, ds
+   int 10H
+   
+   ; Save hours minutes and seconds in _L locations
+   mov byte al, [seconds]
+   mov byte [seconds_L], al
+   
+   mov byte al, [minutes]
+   mov byte [minutes_L], al
+   
+   mov byte al, [hours]
+   mov byte [hours_L], al
+   
+   mov al, [key1]		;set _L keys to Keys
+   mov byte [key1_L], al 
+   mov al, [key2]
+   mov byte [key2_L], al
+   mov al, [key3]
+   mov byte [key3_L], al
+   mov al, [key4]
+   mov byte [key4_L], al
+   mov al, [key5]
+   mov byte [key5_L], al
+   mov al, [key6]
+   mov byte [key6_L], al
+      
+   intr1_Done:
+   
+   mov dx, INT_A0 ; 8259 command
+   mov al, 00100000b ; OCW2
+   out dx, al
+   
+   iret
+   
+   
+   ; Long jump
+	end_jmp:
+	jmp intr4_Done
+; --------------------------------------------------------------------------------------------------------------------------
+  ; Interrupt service routine for timer	
+	intr4:
+	
+	; Check if timer is on
+	cmp byte [start_stop], 0
+	je end_jmp
+	
+	; dec and check the second counter, if a second has past
+	dec byte [secCount]
+	mov al, [secCount]
+	cmp al, 0
+	jne end_jmp
+	
+	; reset the second counter
+	mov byte al, [speed]
+	mov byte [secCount], al ;initialze loop
+	
+	; inc seconds
+	inc byte [seconds];
+	
+	mov byte al, 0
+	mov byte al, [seconds]
+	
+	; mov dx, LED8 
+	; out dx, al
+	
+	; divide seconds by 60
+	mov ax, 0
+	mov al, [seconds]
+	div byte [sixty]
+	mov [seconds], ah ; put remainder in seconds
+	
+	cmp al, 0	; Check if a minute has past
+	je seconds_code
+	inc byte [minutes]; ; if so inc minute
+	
+	; Divide Minutes by 60
+	mov ax, 0
+	mov al, [minutes]
+	div byte [sixty]
+	mov [minutes], ah ; put remainder in minutes
+	
+	cmp al, 0	; Check if a hour has past
+	je minutes_code
+	inc byte [hours]; ; if so inc hours
+	
+	; Divide hours by 10
+	mov ax, 0
+	mov al, [hours]
+	div byte [ten]
+	
+	; Convert hours to ascii
+   	 add ah, 48
+	 mov byte [key5], ah
+	 add al, 48
+	 mov byte [key6], al
+	
+	minutes_code:
+	; Divide minutes by 10
+	mov ax, 0
+	mov al, [minutes]
+	div byte [ten]
+	
+	; Convert minutes to ascii
+   	 add ah, 48
+	 mov [key3], ah
+	 add al, 48
+	 mov [key4], al
+	
+	seconds_code:
+	; Divide seconds by 10
+	mov ax, 0
+	mov al, [seconds]
+	div byte [ten]
+	
+	; Convert seconds to ascii
+   	add ah, 48
+	mov [key1], ah
+	add al, 48
+	mov [key2], al
+	
+
+	; Display all Keys
+   mov ax, 1 ; second row
+   mov bx, key6
+   mov cx, 8
+   mov dx, 11
+   mov si, ds
+   int 10H
+	
+	intr4_Done:
+   
+   mov dx, INT_A0 ; 8254 command
+   mov al, 00100000b ; OCW2
+   out dx, al
+	
+	iret
+	
+	
+; --------------------------------------------------------------------------------------------------------------------------
+; 													      			
+; RAM data section, align at 16 byte boundry, 16-bit
+; --------------------------------------------------------------------------------------------------------------------------	
+
+
+section CONSTSEG USE16 ALIGN=16 CLASS=CONST
+	
+welcomemsg:	db " Time:     00:00:00 "
+			db " Current:  00:00:00 "
+			db " Last:     00:00:00 "
+			db " Lap:      00:00:00 "
+
+key6:	db 48
+key5:	db 48
+		db 58
+key4:	db 48
+key3:	db 48
+		db 58
+key2:	db 48
+key1:	db 48 
+
+key6_L:	db 48
+key5_L:	db 48
+		db 58
+key4_L:	db 48
+key3_L:	db 48
+		db 58
+key2_L:	db 48
+key1_L:	db 48
+
+secCount: db 40
+
+seconds: db 0
+minutes: db 0
+hours: db 0
+		
+seconds_L: db 0
+minutes_L: db 0
+hours_L: db 0
+		
+start_stop: db 0
+
+lap_sec: db 0
+lap_min: db 0
+lap_hour: db 0
+
+ten:	db 10
+sixty:	db 60
+
+speed:	db 40
